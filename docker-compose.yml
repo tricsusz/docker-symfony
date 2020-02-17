@@ -7,10 +7,10 @@ services:
         ports:
             - "3306:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: symfony
-            MYSQL_USER: symfony
-            MYSQL_PASSWORD: symfony
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         networks:
             - db
     php:
@@ -19,8 +19,8 @@ services:
         ports:
             - "9000:9001"
         volumes:
-            - ./symfony:/var/www/symfony:cached
-            - ./logs/symfony:/var/www/symfony/var/log:cached
+            - ./symfony:${APP_FOLDER}:cached
+            - ./logs/symfony:${APP_FOLDER}/var/log:cached
         depends_on:
             - db
         networks:
@@ -37,7 +37,7 @@ services:
             - php
         volumes:
             - ./logs/nginx:/var/log/nginx:cached
-            - ./symfony:/var/www/symfony:cached
+            - ./symfony:${APP_FOLDER}:cached
 networks:
     db:
     php:
