@@ -41,6 +41,9 @@ RUN echo "$(curl -sS https://composer.github.io/installer.sig) -" > composer-set
 
 RUN apk add --no-cache bash
 
+RUN apk add --update nodejs npm
+RUN apk add yarn
+
 COPY symfony.ini /etc/php7/conf.d/
 COPY symfony.ini /etc/php7/cli/conf.d/
 COPY xdebug.ini  /etc/php7/conf.d/
